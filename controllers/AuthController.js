@@ -4,7 +4,7 @@ const middleware = require('../middleware')
 const Login = async (req, res) => {
   try {
     const user = await User.findOne({
-      where: { email: req.bnody.email },
+      where: { email: req.body.email },
       raw: true
     })
     if (
@@ -13,6 +13,7 @@ const Login = async (req, res) => {
     ) {
       let payload = {
         id: user.id,
+        name: user.name,
         email: user.email
       }
       let token = middleware.createToken(payload)
