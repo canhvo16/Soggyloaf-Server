@@ -1,4 +1,4 @@
-const { Anime } = require('../models')
+const { Anime, Episode } = require('../models')
 
 const GetAnime = async (req, res) => {
   try {
@@ -19,7 +19,19 @@ const CreateAnime = async (req, res) => {
   }
 }
 
+const GetAnimeEpisodes = async (req, res) => {
+  try {
+    let result = await Anime.findByPk(req.params.anime_id, {
+      include: Episode
+    })
+    res.send(result)
+  } catch (error) {
+    throw error
+  }
+}
+
 module.exports = {
   GetAnime,
-  CreateAnime
+  CreateAnime,
+  GetAnimeEpisodes
 }
