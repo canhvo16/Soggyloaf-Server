@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Episode.belongsToMany(models.Anime, { foreignKey: 'animeId' })
     }
   }
   Episode.init(
@@ -17,7 +17,14 @@ module.exports = (sequelize, DataTypes) => {
       description: DataTypes.STRING,
       lengh: DataTypes.INTEGER,
       photo: DataTypes.STRING,
-      animeId: DataTypes.INTEGER
+      animeId: {
+        type: DataTypes.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'anime',
+          key: 'id'
+        }
+      }
     },
     {
       sequelize,

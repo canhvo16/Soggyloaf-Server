@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         as: 'animes',
         foreignKey: 'animeId'
       })
+      Anime.hasMany(models.Episode, { foreignKey: 'animeId' })
     }
   }
   Anime.init(
@@ -22,8 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       season: DataTypes.INTEGER,
       episodes: DataTypes.INTEGER,
       photo: DataTypes.STRING,
-      genre: DataTypes.STRING,
-      playlistId: DataTypes.INTEGER
+      genre: DataTypes.STRING
     },
     {
       sequelize,
