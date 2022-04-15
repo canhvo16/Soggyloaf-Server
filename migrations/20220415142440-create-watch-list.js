@@ -9,20 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       animeId: {
-        type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'animes',
-          key: 'id'
-        }
+        type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'users',
-          key: 'id'
-        }
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
