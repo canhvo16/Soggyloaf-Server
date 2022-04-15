@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Anime.belongsToMany(models.User, {
         through: models.WatchList,
-        as: 'animes',
+        as: 'shows',
         foreignKey: 'animeId'
       })
       Anime.hasMany(models.Episode, { foreignKey: 'animeId' })
