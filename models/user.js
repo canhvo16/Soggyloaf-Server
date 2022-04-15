@@ -8,7 +8,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      User.hasOne(models.WatchList, { foreignKey: 'userId' })
+      User.belongsToMany(models.Anime, {
+        as: 'watch_list',
+        through: models.WatchList,
+        foreignKey: 'userId'
+      })
     }
   }
   User.init(
