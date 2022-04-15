@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Episode.belongsToMany(models.Anime, { foreignKey: 'animeId' })
+      Episode.belongsTo(models.Anime, { foreignKey: 'animeId' })
     }
   }
   Episode.init(
