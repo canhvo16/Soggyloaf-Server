@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
       season: DataTypes.INTEGER,
       episodes: DataTypes.INTEGER,
       photo: DataTypes.STRING,
-      genre: DataTypes.STRING
+      genre: DataTypes.STRING,
+      animeRefId: DataTypes.INTEGER
     },
     {
       sequelize,
