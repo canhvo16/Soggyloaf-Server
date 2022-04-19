@@ -9,11 +9,10 @@ const Login = async (req, res) => {
     })
     if (
       user &&
-      middleware.comparePassword(user.passwordDigest, req.body.password)
+      (await middleware.comparePassword(user.passwordDigest, req.body.password))
     ) {
       let payload = {
         id: user.id,
-        name: user.name,
         email: user.email
       }
       let token = middleware.createToken(payload)
@@ -50,8 +49,54 @@ const CheckSession = async (req, res) => {
   res.send(payload)
 }
 
+const updatePassword = async (req, res) => {
+  try {
+    const user = await User.findOne({ where: { email: req.body.email } })
+    if (
+      user &&
+      (await middleware.comparePassword(
+        user.dataValues.passwordDigest,
+        req.body.oldPassword
+      ))
+    ) {
+      let passwordDigest = await middleware.hashPassword(req.body.newPassword)
+      await user.update({ passwordDigest })
+      return res.send({ status: 'Success', payload: user })
+    }
+    res.status(401).send({ status: 'Error', msg: 'Invalid credentials!' })
+  } catch (error) {
+    throw error
+  }
+}
+
+const updateName = async (req, res) => {
+  try {
+    let name = req.body.name
+    const user = await User.findOne({ where: { email: req.body.email } })
+    if (user) {
+      await user.update({ name })
+      res.send({ status: 'Success', msg: 'Name updated!' })
+    }
+    res.status(401).send({ status: 'Error', msg: 'Invalid email!' })
+  } catch (error) {
+    throw error
+  }
+}
+
+const destroyAccount = async (req, res) => {
+  try {
+    await User.destroy({ where: { id: req.params.id } })
+    res.send({ status: 'Success', msg: 'Account Destroyed!' })
+  } catch (error) {
+    throw error
+  }
+}
+
 module.exports = {
   Login,
   Register,
-  CheckSession
+  CheckSession,
+  updatePassword,
+  updateName,
+  destroyAccount
 }

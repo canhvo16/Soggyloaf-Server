@@ -10,5 +10,23 @@ router.get(
   middleware.verifyToken,
   controller.CheckSession
 )
+router.put(
+  '/update-password',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.updatePassword
+)
+router.put(
+  '/update-name',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.updateName
+)
+router.delete(
+  '/destroy/:id',
+  middleware.stripToken,
+  middleware.verifyToken,
+  controller.destroyAccount
+)
 
 module.exports = router
