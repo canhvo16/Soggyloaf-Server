@@ -10,5 +10,6 @@ Router.use('/episodes', EpisodeRouter)
 // Router.use('/watchlist', WatchListRouter)
 Router.use('/users', UserRouter)
 Router.use('/auth', AuthRouter)
+Router.use('/watchlist', WatchListRouter)
 
 module.exports = Router
