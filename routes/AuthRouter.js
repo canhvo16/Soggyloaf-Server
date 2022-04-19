@@ -4,6 +4,7 @@ const middleware = require('../middleware')
 
 router.post('/register', controller.Register)
 router.post('/login', controller.Login)
+router.get('/user/:id', controller.getUserById)
 router.get(
   '/session',
   middleware.stripToken,
