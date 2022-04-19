@@ -30,6 +30,7 @@ const addToList = async (req, res) => {
 const addAnimeToList = async (req, res) => {
   const userId = req.body.userId
   const animeRefId = req.body.animeRefId
+  console.log(animeRefId)
   const animeId = await Anime.create({
     animeRefId
   }).then(item => item.id)
