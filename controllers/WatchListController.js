@@ -18,7 +18,6 @@ const getWatchListById = async (req, res) => {
 const addToList = async (req, res) => {
   const userId = req.params.id
   const animeId = req.body.animeId
-  console.log(animeId)
   const newListEntity = {
     userId,
     animeId
@@ -30,7 +29,6 @@ const addToList = async (req, res) => {
 const addAnimeToList = async (req, res) => {
   const userId = req.body.userId
   const animeRefId = req.body.animeRefId
-  console.log(animeRefId)
   const animeId = await Anime.create({
     animeRefId
   }).then(item => item.id)
@@ -38,13 +36,23 @@ const addAnimeToList = async (req, res) => {
     userId,
     animeId
   }
-  console.log(newListEntity)
   const respond = await WatchList.create(newListEntity)
   res.send(respond)
 }
 
+const removeAnimeFromList = async (req, res) => {
+  const userId = req.params.userId
+  const animeId = req.params.animeId
+  WatchList.destroy({
+    where: { userId, animeId }
+  })
+  res.send('deleted')
+}
+
+
 module.exports = {
   getWatchListById,
   addToList,
-  addAnimeToList
+  addAnimeToList,
+  removeAnimeFromList
 }
