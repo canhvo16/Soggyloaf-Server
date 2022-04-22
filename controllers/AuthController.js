@@ -77,7 +77,7 @@ const updateName = async (req, res) => {
       await user.update({ name })
       res.send({ status: 'Success', msg: 'Name updated!' })
     }
-    res.status(401).send({ status: 'Error', msg: 'Invalid email!' })
+    else { res.status(401).send({ status: 'Error', msg: 'Invalid email!' }) }
   } catch (error) {
     throw error
   }
