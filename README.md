@@ -26,8 +26,8 @@ SoggyLoaf is a full stack PERN application inspired by crunchyroll. Users are ab
 
 ## **_Screenshots_**
 
-![SoggyLoaf](src/assets/SoggyLoaf-HomePage.png)
-![ERD, Component Diagrams](src/assets/Soggyloaf.jpg)
+![SoggyLoaf](assets/SoggyLoaf-HomePage.png)
+![ERD, Component Diagrams](assets/Soggyloaf.jpg)
 
 ---
 
